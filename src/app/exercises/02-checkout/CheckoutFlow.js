@@ -1,6 +1,7 @@
 'use client';
 import React from 'react';
 
+import Spinner from '../../../components/Spinner'
 import CartTable from './CartTable';
 
 function CheckoutFlow({
@@ -8,7 +9,16 @@ function CheckoutFlow({
   taxRate,
   handleDeleteItem,
 }) {
-  if (items.length === 0) {
+    // initial state, two pass strategy, check if 'null' and show spinner
+    if (items === null) {
+      return (
+        <div className="checkout-flow empty">
+          <Spinner />
+        </div>
+      );
+    }
+
+    if (items.length === 0) {
     return (
       <div className="checkout-flow empty">
         <p>Your Cart is Empty</p>
